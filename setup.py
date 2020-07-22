@@ -12,8 +12,9 @@ setuptools.setup(
     description="a tool for comparing human names",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/digitalkaoz/py-human-name-compare",
+    url="https://github.com/digitalkaoz/py_human_name_compare",
     packages=setuptools.find_packages(),
+    keywords = ['NLP', 'HUMANNAME'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
