@@ -52,7 +52,7 @@ for a in _remove_title:
 guess_gender = gender.Detector()
 
 
-def _normalize_title(inp: str) -> Optional[str]:
+def normalize_title(inp: str) -> Optional[str]:
     """
     normalizes medical titles
     """
@@ -123,12 +123,12 @@ def person_title(inp: str, normalize=True) -> Optional[str]:
                 title = "{} {} {}".format(title, city, t)
 
     if title is not None and normalize is True:
-        title = _normalize_title(title)
+        title = normalize_title(title)
 
     return None if title.strip() == "" else title
 
 
-def _remove_title(inp: str) -> Optional[str]:
+def remove_title(inp: str) -> Optional[str]:
     """
     removes the medic title from a string so the real medic name persists
     Args:
@@ -213,7 +213,7 @@ def parse_name(inp: str) -> Optional[HumanName]:
 
     # remove gender and title
     inp = _remove_gender(inp)
-    inp = _remove_title(inp)
+    inp = remove_title(inp)
 
     if inp is None or inp.strip() == "":
         return None
