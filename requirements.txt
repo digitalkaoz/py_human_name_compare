@@ -1,3 +1,4 @@
 python-Levenshtein~=0.12.0
 click~=7.1.2
 nameparser~=1.0.6
+gender_guesser~=0.4
