@@ -1,6 +1,6 @@
 import unittest
 
-from hn_compare import match_name
+from human_name_compare import match_name
 
 name_sets = [
     "Robert Schönthal",

@@ -3,7 +3,7 @@ import click
 import pkg_resources
 
 import logger
-from hn_compare import match_name
+from human_name_compare import match_name
 
 VERSION = pkg_resources.require("human_name_compare")[0].version
 

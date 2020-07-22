@@ -1,6 +1,6 @@
 import unittest
 
-from hn_compare import person_name, person_title
+from human_name_compare import person_name, person_title
 
 NAMES = {
     "Alexander Schwarzenböck ab 01.04.2018": ["male", False, False, None, "Alexander Schwarzenböck"],
