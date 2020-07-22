@@ -211,6 +211,7 @@ def parse_name(inp: str) -> Optional[HumanName]:
     if inp is None or inp.strip() == "":
         return None
 
+    inp = inp.title()
     # remove gender and title
     inp = _remove_gender(inp)
     inp = remove_title(inp)
@@ -220,7 +221,7 @@ def parse_name(inp: str) -> Optional[HumanName]:
 
     inp = inp.replace(".-", ".").replace(".", ". ").replace("  ", " ")
 
-    hn = HumanName(inp.title(), constants=constants)
+    hn = HumanName(inp, constants=constants)
 
     # if there was only a last name given, the parser is confused
     if hn.last == "":

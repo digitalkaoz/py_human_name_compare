@@ -1,6 +1,6 @@
 import unittest
 
-from human_name_compare import person_name, person_title
+from human_name_compare import person_name, person_title, parse_name
 
 NAMES = {
     "Alexander Schwarzenböck ab 01.04.2018": ["male", False, False, None, "Alexander Schwarzenböck"],
@@ -73,6 +73,7 @@ class NormalizerTestCase(unittest.TestCase):
 
     def test_name(self):
         self.assertEqual("Günter Lauer", person_name("Prof.Dr.med. Dr. med. dent. Günter Lauer"))
+        self.assertEqual("Christof Dame", parse_name("prof. dr. med. christof dame"))
         for k, values in NAMES.items():
             self.assertEqual(values[4], person_name(k), k)
 
