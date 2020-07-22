@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='human_name_compare',
-    version='0.2.0',
+    name='human-name-compare',
+    version='0.2.2',
     scripts=['hn-compare'],
     author="Robert Schoenthal",
     author_email="robert.schoenthal@gmail.com",
@@ -13,8 +13,9 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/digitalkaoz/py_human_name_compare",
-    download_url="https://github.com/digitalkaoz/py_human_name_compare/archive/0.2.tar.gz",
-    packages=setuptools.find_packages(),
+    download_url="https://github.com/digitalkaoz/py_human_name_compare/archive/0.2.2.tar.gz",
+    packages=['human_name_compare'],
+    package_dir={'human_name_compare': '.'},
     keywords=['NLP', 'HUMANNAME'],
     classifiers=[
         "Programming Language :: Python :: 3",
