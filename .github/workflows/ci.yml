@@ -30,4 +30,4 @@ jobs:
       run: |
         pip install pytest
         pip install pytest-cov
-        pytest ./tests --doctest-modules --cov=. --cov-report=term -rA
+        python3 -m pytest . --cov=. --cov-report=term -rA
