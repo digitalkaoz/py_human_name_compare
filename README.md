@@ -31,7 +31,7 @@ $ hn-compare compare "Robert Schönthal" "Robert Schönthal"
 ### Python
 
 ```python
-from hn_compare import match_name
+from human_name_compare import match_name
 
 match_name("Robert Schönthal", "Robert Schönthal")
 ```
