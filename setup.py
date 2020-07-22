@@ -13,6 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/digitalkaoz/py_human_name_compare",
+    download_url="https://github.com/digitalkaoz/py_human_name_compare/archive/0.1.tar.gz",
     packages=setuptools.find_packages(),
     keywords=['NLP', 'HUMANNAME'],
     classifiers=[
