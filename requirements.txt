@@ -1,0 +1,3 @@
+python-Levenshtein=*
+click~=7.1.2
+nameparser~=1.0.6

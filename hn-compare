@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+import click
+import pkg_resources
+
+import logger
+from hn_compare import match_name
+
+VERSION = pkg_resources.require("human_name_compare")[0].version
+
+
+def debug_logging(verbose):
+    if verbose == 1:
+        click.echo(click.style("Debugging Level is set", fg='green'))
+        logger.enable_debug()
+
+
+@click.group()
+@click.version_option(version=VERSION, prog_name='hn_compare')
+def hn_compare():  # pragma: no cover
+    pass
+
+
+@click.command()
+@click.argument('a', required=True)
+@click.argument('b', required=True)
+def compare(a, b):
+    if match_name(a, b):
+        logger.log_g("the names '{}' and '{}' are the same person".format(a, b))
+    else:
+        logger.log_r("the names '{}' and '{}' dont match".format(a, b))
+
+
+hn_compare.add_command(compare)
+
+if __name__ == '__main__':  # pragma: no cover
+    hn_compare()
