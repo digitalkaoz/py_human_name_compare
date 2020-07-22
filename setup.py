@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='human-name-compare',
-    version='0.1',
+    version='0.1.1',
     scripts=['hn-compare'],
     author="Robert Schoenthal",
     author_email="robert.schoenthal@gmail.com",

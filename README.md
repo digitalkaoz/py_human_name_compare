@@ -1,6 +1,8 @@
 # Human Name Compare
 
 ![human_name_compare](https://github.com/digitalkaoz/py_human_name_compare/workflows/human_name_compare/badge.svg)
+[![PyPI version](https://badge.fury.io/py/human-name-compare.svg)](https://badge.fury.io/py/human-name-compare)
+
 
 the Problem:
 
