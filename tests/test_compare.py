@@ -21,6 +21,7 @@ no_sets = [
 class CompareTestCase(unittest.TestCase):
 
     def test_names(self):
+        self.assertFalse(match_name('Maria-Christina Jung', 'Carin Jung'))
         self.assertTrue(match_name('Darius Schlemmer', 'Dariusz Schlemmer'))
         self.assertTrue(match_name('Horst von Schlemmer', 'Horst Schlemmer'))
         self.assertTrue(match_name('Horst-Eugen Schlemmer', 'HORST SCHLEMMER'))
