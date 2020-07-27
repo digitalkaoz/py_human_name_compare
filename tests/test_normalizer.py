@@ -72,6 +72,7 @@ class NormalizerTestCase(unittest.TestCase):
             self.assertEqual(values[3], person_title(k), k)
 
     def test_name(self):
+        self.assertEqual("Jens Malte Baron", parse_name("prof. dr. med. jens-malte baron"))
         self.assertEqual("Ruediger Baba", parse_name("dr. med. vet. ruediger baba"))
         self.assertEqual("Günter Lauer", person_name("Prof.Dr.med. Dr. med. dent. Günter Lauer"))
         self.assertEqual("Christof Dame", parse_name("prof. dr. med. christof dame"))
