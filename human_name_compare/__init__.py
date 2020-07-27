@@ -41,7 +41,7 @@ _additional_titles = ["med.", "Dipl.", "Psych.", "Apl.", "Ass.", "rer.", "nat.",
 _surname_titles = ["Von ", "von ", "van ", "Van ", "dos ", "Dos "]
 
 # some titles are actual names, the result would be None, therefore we remove some
-_remove_title = ["mahdi", "graf", "singer", "lama", "pastor", "imam", "jun"]
+_remove_title = ["mahdi", "graf", "singer", "lama", "pastor", "imam", "jun", "baba"]
 
 constants = Constants()
 for a in _additional_titles:
