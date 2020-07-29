@@ -211,6 +211,10 @@ def parse_name(inp: str) -> Optional[HumanName]:
     if inp is None or inp.strip() == "":
         return None
 
+    if " " not in inp and "." in inp:
+        #if there are missing spaces, split them up
+        inp = inp.replace(".", ". ")
+
     inp = inp.title()
     # remove gender and title
     inp = _remove_gender(inp)
@@ -242,6 +246,9 @@ def parse_name(inp: str) -> Optional[HumanName]:
         hn.middle = " ".join(hn.middle_list)
         hn.first_list = [n for n in hn.first_list if n.strip() != ""]
         hn.middle_list = [n for n in hn.middle_list if n.strip() != ""]
+
+    if hn.first.endswith(".") and len(hn.first) > 1:
+        hn.first = hn.first[0:-1]
 
     return hn
 
