@@ -324,6 +324,9 @@ def match_name(own: str, other: str) -> bool:
 
         return list(map(_remove, surnames))
 
+    if hn_own is None or hn_other is None:
+        return False
+
     # remove surname titles like "von" from surnames
     hn_other.last_list = _remove_surname_titles(hn_other.last_list)
     hn_other.last = " ".join(hn_other.last_list)
