@@ -352,7 +352,7 @@ def match_name(own: str, other: str) -> bool:
                     matches += 1
         if matches < 2:
             return False
-    elif own_lasts != other_lasts and distance(own_lasts, other_lasts) > 1:
+    elif own_lasts[0] != other_lasts[0] or (own_lasts != other_lasts and distance(own_lasts, other_lasts) > 1):
         return False
 
     def _match_name_list(name: str, other: List[str]):
