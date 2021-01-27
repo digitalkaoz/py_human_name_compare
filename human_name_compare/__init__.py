@@ -41,7 +41,7 @@ _additional_titles = ["med.", "Dipl.", "Psych.", "Apl.", "Ass.", "rer.", "nat.",
 _surname_titles = ["Von ", "von ", "van ", "Van ", "dos ", "Dos "]
 
 # some titles are actual names, the result would be None, therefore we remove some
-_remove_title = ["mahdi", "graf", "singer", "lama", "pastor", "imam", "jun", "baba","baron"]
+_remove_title = ["mahdi", "graf", "singer", "lama", "pastor", "imam", "jun", "baba", "baron"]
 
 constants = Constants()
 for a in _additional_titles:
@@ -212,7 +212,7 @@ def parse_name(inp: str) -> Optional[HumanName]:
         return None
 
     if " " not in inp and "." in inp:
-        #if there are missing spaces, split them up
+        # if there are missing spaces, split them up
         inp = inp.replace(".", ". ")
 
     inp = inp.title()
@@ -336,7 +336,23 @@ def match_name(own: str, other: str) -> bool:
     # if the last names doesnt match, we skip here
     own_lasts = " ".join([on.lower() for on in hn_own.last_list])
     other_lasts = " ".join([on.lower() for on in hn_other.last_list])
-    if own_lasts != other_lasts and distance(own_lasts, other_lasts) > 1:
+
+    # compound surnames
+    if "-" in own_lasts or "-" in other_lasts:
+        own_lasts_splitted = own_lasts.split("-")
+        other_lasts_splitted = other_lasts.split("-")
+        matches = 0
+        for o in own_lasts_splitted:
+            for ot in other_lasts_splitted:
+                if o == ot or distance(o, ot) <= 1 and (len(o) >= 5 or len(ot) >= 5):
+                    matches += 1
+        for o in reversed(own_lasts_splitted):
+            for ot in other_lasts_splitted:
+                if o == ot or distance(o, ot) <= 1 and (len(o) >= 5 or len(ot) >= 5):
+                    matches += 1
+        if matches < 2:
+            return False
+    elif own_lasts != other_lasts and distance(own_lasts, other_lasts) > 1:
         return False
 
     def _match_name_list(name: str, other: List[str]):
@@ -364,7 +380,8 @@ def match_name(own: str, other: str) -> bool:
     other_first_middles = hn_other.first + hn_other.middle
 
     # check if the firstnames+middlename matches (if one side has no firstname we assume a match
-    first_name_matches_fuzzy = own_first_middles.lower() == other_first_middles.lower() or (own_first_middles.startswith(other_first_middles) or other_first_middles.startswith(own_first_middles))
+    first_name_matches_fuzzy = own_first_middles.lower() == other_first_middles.lower() or (
+                own_first_middles.startswith(other_first_middles) or other_first_middles.startswith(own_first_middles))
 
     if first_name_matches is False or first_name_matches_fuzzy is False:
         # if the initials dont match, dont match
