@@ -334,7 +334,9 @@ def match_name(own: str, other: str) -> bool:
     hn_own.last = " ".join(hn_own.last_list)
 
     # if the last names doesnt match, we skip here
-    if [on.lower() for on in hn_own.last_list] != [on.lower() for on in hn_other.last_list]:
+    own_lasts = " ".join([on.lower() for on in hn_own.last_list])
+    other_lasts = " ".join([on.lower() for on in hn_other.last_list])
+    if own_lasts != other_lasts and distance(own_lasts, other_lasts) > 1:
         return False
 
     def _match_name_list(name: str, other: List[str]):
@@ -358,24 +360,29 @@ def match_name(own: str, other: str) -> bool:
     # check if the firstnames matches (if one side has no firstname we assume a match
     first_name_matches = True if (hn_own.first == "" or hn_other.first == "") else _compare_names(hn_own.first_list,
                                                                                                   hn_other.first_list)
+    own_first_middles = hn_own.first + hn_own.middle
+    other_first_middles = hn_other.first + hn_other.middle
 
-    if first_name_matches is False:
+    # check if the firstnames+middlename matches (if one side has no firstname we assume a match
+    first_name_matches_fuzzy = own_first_middles.lower() == other_first_middles.lower() or (own_first_middles.startswith(other_first_middles) or other_first_middles.startswith(own_first_middles))
+
+    if first_name_matches is False or first_name_matches_fuzzy is False:
         # if the initials dont match, dont match
         if hn_own.first[0] != hn_other.first[0]:
             return False
 
         # if the names are longer than 5 and start with the same letter we allow tiny typos
         l_distance = distance(hn_own.first, hn_other.first)
-        if l_distance < 2 and hn_own.first[0] == hn_other.first[0] and len(hn_other.first) > 5 and len(hn_own.first) > 5:
+        if l_distance < 2 and (len(hn_other.first) >= 5 or len(hn_own.first) >= 5):
             first_name_matches = True
 
     # if none has middle name its a match
     if len(hn_own.middle_list) == 0 and len(hn_other.middle_list) == 0:
-        return first_name_matches
+        return first_name_matches or first_name_matches_fuzzy
 
     # if only one side has a middle name its a match
     if len(hn_own.middle_list) == 0 and len(hn_other.middle_list) > 0 or len(hn_own.middle_list) > 0 and len(
             hn_other.middle_list) == 0:
-        return first_name_matches
+        return first_name_matches or first_name_matches_fuzzy
 
     return _compare_names(hn_own.middle_list, hn_other.middle_list)
