@@ -360,9 +360,13 @@ def match_name(own: str, other: str) -> bool:
                                                                                                   hn_other.first_list)
 
     if first_name_matches is False:
+        # if the initials dont match, dont match
+        if hn_own.first[0] != hn_other.first[0]:
+            return False
+
         # if the names are longer than 5 and start with the same letter we allow tiny typos
         l_distance = distance(hn_own.first, hn_other.first)
-        if l_distance < 3 and hn_own.first[0] == hn_other.first[0] and len(hn_other.first) > 5 and len(hn_own.first) > 5:
+        if l_distance < 2 and hn_own.first[0] == hn_other.first[0] and len(hn_other.first) > 5 and len(hn_own.first) > 5:
             first_name_matches = True
 
     # if none has middle name its a match

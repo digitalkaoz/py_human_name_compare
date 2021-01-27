@@ -21,6 +21,7 @@ no_sets = [
 class CompareTestCase(unittest.TestCase):
 
     def test_names(self):
+        self.assertFalse(match_name('Bernhard König','Burkhard König'))
         self.assertFalse(match_name('Uwe Töpfer', 'Udo Töpfer'))
         self.assertFalse(match_name('Maria-Christina Jung', 'Carin Jung'))
         self.assertTrue(match_name('Darius Schlemmer', 'Dariusz Schlemmer'))
@@ -32,6 +33,8 @@ class CompareTestCase(unittest.TestCase):
         self.assertTrue(match_name('Jörn Müller', 'Joern Mueller'))
         self.assertTrue(match_name('Andrè Müller', 'Andre Mueller'))
         self.assertTrue(match_name('H.-Eberhard Börngen', 'Horst E Börngen'))
+        self.assertFalse(match_name('Lutz König', 'Lars König'))
+        self.assertFalse(match_name('Kerstin König', 'Kristin König'))
 
         for n in name_sets:
             for on in name_sets:
