@@ -385,7 +385,7 @@ def match_name(own: str, other: str) -> bool:
 
     if first_name_matches is False or first_name_matches_fuzzy is False:
         # if the initials dont match, dont match
-        if hn_own.first[0] != hn_other.first[0]:
+        if (len(hn_own.first) > 0 and len(hn_own.first) > 0) and hn_own.first[0] != hn_other.first[0]:
             return False
 
         # if the names are longer than 5 and start with the same letter we allow tiny typos
