@@ -77,8 +77,10 @@ def normalize_title(inp: str) -> Optional[str]:
         .replace(". /", ". ") \
         .replace(" - ", " ") \
         .replace(".-", ".") \
+        .replace(". -", ". ") \
+        .replace('Dr.med.', 'Dr. med.').replace('Dr', 'Dr.').replace('..', '.').replace('.', '. ') \
         .replace("  ", " ") \
-        .replace(". -", ". ").strip()
+        .strip()
 
 
 def person_title(inp: str, normalize=True) -> Optional[str]:
