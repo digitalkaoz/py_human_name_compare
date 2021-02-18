@@ -59,6 +59,7 @@ def normalize_title(inp: str) -> Optional[str]:
     if inp is None:
         return None
     return inp.replace("Professor", "Prof.") \
+        .replace("prof.", "Prof.") \
         .replace("doktor medicine", "Dr. med.") \
         .replace("Doktor", "Dr.") \
         .replace("dr/Universität", "Dr. Univ.") \
@@ -72,13 +73,17 @@ def normalize_title(inp: str) -> Optional[str]:
         .replace("Privatdozent", "PD") \
         .replace("Privat - Dozent", "PD") \
         .replace("Priv.-Doz.", "PD") \
+        .replace("Priv.Doz.", "PD") \
+        .replace("Priv. Doz.", "PD") \
+        .replace("PDDr.", "PD Dr.") \
         .replace(" / ", " ") \
         .replace("./", ". ") \
         .replace(". /", ". ") \
         .replace(" - ", " ") \
         .replace(".-", ".") \
         .replace(". -", ". ") \
-        .replace('Dr.med.', 'Dr. med.').replace('Dr', 'Dr.').replace('..', '.').replace('.', '. ') \
+        .replace('Dr.med.', 'Dr. med.').replace('Dr', 'Dr.').replace('Prof', 'Prof.')\
+        .replace('..', '.').replace('.','. ') \
         .replace("  ", " ") \
         .strip()
 
