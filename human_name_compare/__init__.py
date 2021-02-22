@@ -61,6 +61,7 @@ def normalize_title(inp: str) -> Optional[str]:
     return inp.replace("dr/Universität", "Dr. Univ.") \
         .replace("Universitätsprofessor", "Prof. Univ.") \
         .replace("Universitätsprof.", "Prof. Univ.") \
+        .replace("Univ. Doz.", "PD") \
         .replace("Universität", "Univ.") \
         .replace("Professor", "Prof.") \
         .replace("prof.", "Prof.") \
@@ -77,6 +78,7 @@ def normalize_title(inp: str) -> Optional[str]:
         .replace("Priv.Doz.", "PD") \
         .replace("Priv. Doz.", "PD") \
         .replace("PDDr.", "PD Dr.") \
+        .replace("PD.", "PD") \
         .replace(" / ", " ") \
         .replace("./", ". ") \
         .replace(". /", ". ") \
