@@ -3,7 +3,7 @@ import unicodedata
 from typing import Optional, List
 
 import gender_guesser.detector as gender
-from Levenshtein._levenshtein import distance
+from Levenshtein import distance
 from nameparser import HumanName
 from nameparser.config import Constants
 
