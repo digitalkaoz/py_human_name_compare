@@ -56,7 +56,10 @@ def normalize_title(inp: str) -> Optional[str]:
     """
     normalizes medical titles
     """
-    if inp is None:
+    if type(inp) is not str:
+        return None
+
+    if inp.strip() == "":
         return None
     return inp.replace("dr/Universität", "Dr. Univ.") \
         .replace("Universitätsprofessor", "Prof. Univ.") \
@@ -95,7 +98,10 @@ def person_title(inp: str, normalize=True) -> Optional[str]:
     """
     extract the medic title from "GENDER? TITLE? NAME" strings
     """
-    if inp is None or inp.strip() == "":
+    if type(inp) is not str:
+        return None
+
+    if inp.strip() == "":
         return None
     inp = _remove_gender(inp)
 
@@ -135,18 +141,21 @@ def person_title(inp: str, normalize=True) -> Optional[str]:
     if title is not None and normalize is True:
         title = normalize_title(title)
 
-    return None if title.strip() == "" else title
+    return None if title is None or title.strip() == "" else title
 
 
 def remove_title(inp: str) -> Optional[str]:
     """
-    removes the medic title from a string so the real medic name persists
+    removes the academic title from a string so the real medic name persists
     Args:
         inp: the medic name with title
 
     Returns: only the medic name
     """
-    if inp is None:
+    if type(inp) is not str:
+        return None
+
+    if inp.strip() == "":
         return None
 
     title = person_title(inp, False)
@@ -173,7 +182,7 @@ def remove_title(inp: str) -> Optional[str]:
 
 def _clean_name(inp: str) -> Optional[str]:
     """
-    removes possible nicknames (FH) from the Medic name
+    removes possible nicknames (FH) from the Person name
     """
     if inp is None:
         return None
@@ -196,7 +205,7 @@ def _clean_name(inp: str) -> Optional[str]:
 
 def _remove_gender(inp: str) -> Optional[str]:
     """
-    removes Mann|Frau prefixes from the Medic Name
+    removes gender Mann|Frau prefixes from the name
     """
     if inp is None:
         return None
@@ -219,6 +228,9 @@ def parse_name(inp: str) -> Optional[HumanName]:
     Return: the HumanName object for further work
     """
     if inp is None or inp.strip() == "":
+        return None
+
+    if type(inp) is not str:
         return None
 
     if " " not in inp and "." in inp:
@@ -296,6 +308,12 @@ def person_name(inp: str) -> Optional[str]:
     """
     extract the person name from "GENDER? TITLE? NAME" strings
     """
+    if type(inp) is not str:
+        return None
+
+    if inp.strip() == "":
+        return None
+
     n = parse_name(inp)
     if n is None:
         return None
@@ -305,7 +323,7 @@ def person_name(inp: str) -> Optional[str]:
 
 def match_name(own: str, other: str) -> bool:
     """
-    compares 2 medic names (respects missing middle names, or abbrev. name parts)
+    compares 2 names (respects missing middle names, or abbrev. name parts)
 
     Args:
         own: the first name
